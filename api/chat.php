@@ -12,7 +12,7 @@ if (!$userMessage) {
     exit;
 }
 
-$apiKey = "AIzaSyAanIKeUT3m4KqHfI8hVacfjYpmEE6xYbg";
+$apiKey = "AQ.Ab8RN6KzoRkVyFaWO2z-STX58LXTtzerMGu135nyg2mYNjDQNQ";
 
 // Define your automatic model hierarchy
 $primaryModel = "gemini-2.5-flash"; // Fast and cheap
