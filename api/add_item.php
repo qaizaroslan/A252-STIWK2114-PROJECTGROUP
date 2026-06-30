@@ -1,5 +1,5 @@
 <?php
-require '../api/db.php';
+require 'pi/db.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
