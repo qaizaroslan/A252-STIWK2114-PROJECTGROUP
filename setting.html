@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans pb-20">
+    
+    <header class="bg-white p-3 shadow-sm flex justify-between items-center sticky top-0 z-50 border-b-2 border-red-600">
+        <div class="flex items-center gap-3">
+            <img src="images/logo aiqu.jpeg" alt="AiQu Logo" class="h-10 w-10 rounded-full border-2 border-yellow-400 shadow-sm object-cover">
+            <span class="font-bold text-lg tracking-tight text-red-700">Ayam Gepuk AiQu</span>
+        </div>
+    </header>
+
+    <main class="p-4 space-y-6">
+        <form id="profileForm" class="space-y-4" enctype="multipart/form-data">
+        <div class="flex">
+            <h5 class="pb-2 font-semibold text-lg">Edit Profile</h5>
+        </div>
+
+        <div id="statusAlert" class="hidden p-3 rounded text-sm font-medium transition-all duration-300"></div>
+
+        <div class="flex justify-center mt-4">
+            <div class="relative">
+                <img id="profilePreview" src="https://ui-avatars.com/api/?name=Mohammad&size=100&background=ef4444&color=fff" alt="Profile" class="w-24 h-24 rounded-full border-2 border-white shadow-lg">
+                <label class="absolute bottom-0 right-0 bg-red-600 text-white p-2 rounded-full border-2 border-white text-xs hover:bg-red-700 transition-colors cursor-pointer">
+                <i class="fa-solid fa-pencil"></i>
+                <input type="file" id="cameraFileInput" name="profile_image" accept="image/*" capture="environment" class="hidden">
+            </label>
+            </div>
+        </div>
+        
+            <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">Restaurant Name</label>
+                <input id="restaurantName" name="restaurantName" type="text" placeholder="Ayam Gepuk AiQu" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Email</label>
+                    <input id="email" name="email" type="email" placeholder="name@domain.com" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Phone Number</label>
+                    <input id="phoneNum" name="phoneNum" type="phoneNum" placeholder="03-2345678" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Total Staff</label>
+                    <input id="staff" name="staff" type="text" placeholder="15" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+                </div>
+            </div>
+             <div>
+                <label class="block text-xs font-semibold text-gray-500 mb-1">Restaurant Address</label>
+                <input id="address" name="address" type="text" placeholder="No 76, Jalan Kemboja, Kompleks Sungai Petani" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+            </div>
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">City</label>
+                    <input id="city" name="city" type="text" placeholder="Sungai Petani" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Postal Code</label>
+                    <input id="postalCode" name="postalCode" type="text" placeholder="08000" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">State</label>
+                    <input id="state" name="state" type="text" placeholder="Kedah" class="w-full bg-white border border-gray-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-red-500">
+                </div>
+            </div>
+            
+            <button type="submit" class="w-full bg-red-600 text-white font-bold py-3 rounded-lg shadow-md hover:bg-red-700 transition-colors mt-4">
+                Save
+            </button>
+        </form>
+    </main>
+
+    <nav class="bg-white border-t border-gray-200 fixed bottom-0 w-full flex justify-around p-3 pb-safe z-50">
+        <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-house mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Home</span>
+        </a>
+        <a href="order.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-clipboard-list mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Order</span>
+        </a>
+        <a href="menu.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-utensils mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Menu</span>
+        </a>
+        <a href="setting.html" class="flex flex-col items-center text-red-600">
+            <i class="fa-solid fa-gear mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Setting</span>
+        </a>
+    </nav>
+
+    <script src="js/setting.js"></script>
+</body>
+</html>

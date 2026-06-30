@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans pb-20">
+    
+    <header class="bg-white p-3 shadow-sm flex justify-between items-center sticky top-0 z-50 border-b-2 border-red-600">
+        <div class="flex items-center gap-3">
+            <img src="images/logo aiqu.jpeg" alt="AiQu Logo" class="h-10 w-10 rounded-full border-2 border-yellow-400 shadow-sm object-cover">
+            <span class="font-bold text-lg tracking-tight text-red-700">Ayam Gepuk AiQu</span>
+        </div>
+    </header>
+
+    <main class="p-4 space-y-6">
+        <div class="flex justify-between items-center gap-4">
+            <div>
+                <h1 class="text-xl font-bold">Menus</h1>
+            </div>
+            <div class="flex items-center gap-2">
+            <div class="relative flex-grow sm:flex-grow-0 sm:w-64">
+                <input type="text" id="searchInput" placeholder="Search menu..." class="bg-gray-100 rounded-full py-2 px-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 w-full transition-all">
+                <i class="fa-solid fa-search absolute right-3 top-2.5 text-gray-400 text-sm"></i>
+            </div>
+            <a href="add-item.html" class="text-decoration none">
+                <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 shadow-sm hover:bg-red-700">
+                    <i class="fa-solid fa-plus"></i> Add Item
+                </button>
+            </a>
+            </div>
+        </div>
+        
+        <div class="flex justify-between items-center mb-4 mt-2">
+            <h2 class="text-lg text-gray-900" id="totalCount">Total Item: 0</h2>
+        </div>
+        
+        <div class="flex justify-center space-x-6 border-b border-gray-200 mb-5 overflow-x-auto no-scrollbar" id="categoryTabs">
+            <button data-category="All" class="tab-btn pb-2 border-b-2 border-gray-900 font-bold text-gray-900 whitespace-nowrap text-sm">All</button>
+            <button data-category="Food" class="tab-btn pb-2 text-gray-400 font-medium whitespace-nowrap text-sm hover:text-red-600">Food</button>
+            <button data-category="Drink" class="tab-btn pb-2 text-gray-400 font-medium whitespace-nowrap text-sm hover:text-red-600">Drink</button>
+            <button data-category="Desserts" class="tab-btn pb-2 text-gray-400 font-medium whitespace-nowrap text-sm hover:text-red-600">Desserts</button>
+        </div>
+        
+        <div id="menuGrid" class="grid grid-cols-2 gap-4">
+            <!-- Items loaded by JS -->
+        </div>
+
+        <!-- EDIT ITEM MODAL -->
+        <div id="editItemModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-[60] flex justify-center items-center p-4">
+            <div class="bg-white rounded-xl w-full max-w-md p-6 max-h-[90vh] overflow-y-auto pb-8 border-t-4 border-red-600">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-bold text-lg text-gray-900">Edit Menu Item</h2>
+                    <button onclick="closeEditModal()" class="text-gray-500 hover:text-red-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+                
+                <form id="editItemForm" method="POST" onsubmit="submitEditItem(event)" class="space-y-3 text-sm">
+                    <input type="hidden" id="edit_id">
+                    
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Name</label>
+                        <input type="text" name="name" id="edit_name" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-red-500">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Category</label>
+                        <select id="edit_category" name="category" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-red-500">
+                            <option value="Food">Food</option>
+                            <option value="Drink">Drink</option>
+                            <option value="Desserts">Desserts</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Description</label>
+                        <textarea id="edit_desc" name="desc" rows="2" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-red-500"></textarea>
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Price (RM)</label>
+                        <input type="number" name="price" id="edit_price" step="0.01" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-red-500">
+                    </div>
+                    
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Update Image (Optional)</label>
+                        <div class="flex gap-2 mt-1">
+                            <label class="flex-1 flex flex-col items-center justify-center border border-gray-300 bg-gray-50 text-gray-600 rounded-lg py-3 cursor-pointer hover:bg-gray-100 transition-colors shadow-sm hover:border-red-300 hover:text-red-600">
+                                <i class="fa-solid fa-camera text-lg mb-1 text-red-500"></i>
+                                <span class="text-xs font-medium">Take Photo</span>
+                                <input type="file" name="photo" id="edit_photo_cam" accept="image/*" capture="environment" class="hidden" onchange="updateFileName(this)">
+                            </label>
+                            
+                            <label class="flex-1 flex flex-col items-center justify-center border border-gray-300 bg-gray-50 text-gray-600 rounded-lg py-3 cursor-pointer hover:bg-gray-100 transition-colors shadow-sm hover:border-red-300 hover:text-red-600">
+                                <i class="fa-solid fa-folder-open text-lg mb-1 text-yellow-500"></i>
+                                <span class="text-xs font-medium">From Folder</span>
+                                <input type="file" name="photo" id="edit_photo_folder" accept="image/*" class="hidden" onchange="updateFileName(this)">
+                            </label>
+                        </div>
+                        <p id="file-chosen-text"  class="text-[11px] text-green-600 font-bold mt-2 hidden text-center bg-green-50 py-1 rounded-md border border-green-100"></p>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-red-600 text-white font-bold py-2.5 rounded-lg mt-4 hover:bg-red-700 shadow-sm text-base">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bg-white border-t border-gray-200 fixed bottom-0 w-full flex justify-around p-3 pb-safe z-50">
+        <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-house mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Home</span>
+        </a>
+        <a href="order.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-clipboard-list mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Order</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-red-600">
+            <i class="fa-solid fa-utensils mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Menu</span>
+        </a>
+        <a href="setting.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-gear mb-1 text-lg"></i>
+            <span class="text-[10px] font-medium">Setting</span>
+        </a>
+    </nav>
+    
+    <script src="js/menu.js?v=8"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Menu Item</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans pb-20">
+    <header class="bg-white p-3 shadow-sm flex items-center gap-4 sticky top-0 z-50 border-b-2 border-red-600">
+        <a href="menu.html" class="text-gray-600 hover:text-red-600"><i class="fa-solid fa-arrow-left text-xl"></i></a>
+        <img src="images/logo aiqu.jpeg" alt="AiQu Logo" class="h-10 w-10 rounded-full border-2 border-yellow-400 shadow-sm object-cover">
+        <h1 class="font-bold text-xl text-red-700">Add New Item</h1>
+    </header>
+    
+    <main class="p-4 max-w-md mx-auto">
+        <form id="addItemForm" class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input type="text" id="name" name="name" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-red-500 focus:outline-none">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <select id="category" name="category" required class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-red-500 focus:outline-none">
+                    <option value="Food">Food</option>
+                    <option value="Drink">Drink</option>
+                    <option value="Desserts">Desserts</option>
+                </select>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <textarea id="desc" name="desc" rows="3" placeholder="Description..." class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-red-500 focus:outline-none"></textarea>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1 w-1/4">Price</label>
+                <div class="flex w-3/4 items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-1 focus-within:ring-red-500">
+                    <span class="text-gray-500 mr-2">RM</span>
+                    <input type="number" id="price" name="price" step="0.01" value="0.00" required class="w-full outline-none bg-transparent">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Upload Photo</label>
+                <div class="flex gap-2">
+                    <label class="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 bg-gray-50 text-gray-600 rounded-xl py-6 cursor-pointer hover:bg-gray-100 transition-colors hover:border-red-300 hover:text-red-600">
+                        <i class="fa-solid fa-camera text-2xl mb-2 text-red-500"></i>
+                        <span class="text-xs font-bold uppercase tracking-wide">Camera</span>
+                        <input type="file" id="photo_cam" accept="image/*" capture="environment" class="hidden" onchange="updateAddFileName(this)">
+                    </label>
+                    <label class="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 bg-gray-50 text-gray-600 rounded-xl py-6 cursor-pointer hover:bg-gray-100 transition-colors hover:border-yellow-400 hover:text-yellow-600">
+                        <i class="fa-solid fa-folder-open text-2xl mb-2 text-yellow-500"></i>
+                        <span class="text-xs font-bold uppercase tracking-wide">Folder</span>
+                        <input type="file" id="photo_folder" accept="image/*" class="hidden" onchange="updateAddFileName(this)">
+                    </label>
+                </div>
+                <p id="add-file-chosen-text" class="text-sm text-green-600 font-bold mt-2 hidden text-center bg-green-50 py-2 rounded-lg border border-green-100"></p>
+            </div>
+
+            <button type="submit" class="w-full bg-red-600 text-white font-bold py-3 rounded-lg mt-4 hover:bg-red-700 shadow-sm text-lg">Save</button>
+        </form>
+    </main>
+
+    <nav class="bg-white border-t border-gray-200 fixed bottom-0 w-full flex justify-around p-3 pb-safe z-50">
+        <a href="index.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-house mb-1 text-lg"></i><span class="text-[10px] font-medium">Home</span>
+        </a>
+        <a href="order.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-clipboard-list mb-1 text-lg"></i><span class="text-[10px] font-medium">Order</span>
+        </a>
+        <a href="menu.html" class="flex flex-col items-center text-red-600">
+            <i class="fa-solid fa-utensils mb-1 text-lg"></i><span class="text-[10px] font-medium">Menu</span>
+        </a>
+        <a href="setting.html" class="flex flex-col items-center text-gray-400 hover:text-red-600 transition-colors">
+            <i class="fa-solid fa-gear mb-1 text-lg"></i><span class="text-[10px] font-medium">Setting</span>
+        </a>
+    </nav>
+    
+    <script src="js/add-item.js?v=2"></script>
+</body>
+</html>
