@@ -1,10 +1,9 @@
 
 <?php
-$host = 'localhost';
-$db   = 'food_ordering_db';
-$user = 'root';
-$pass = '';
-$charset = 'utf8mb4';
+$host = getenv('DB_HOST');
+$db   = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASS');
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
