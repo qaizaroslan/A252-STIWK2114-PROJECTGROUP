@@ -1,9 +1,9 @@
 
 <?php
-$host = 'sql308.infinityfree.com';
-$db   = 'if0_42302771_food_ordering_db';
-$user = 'if0_42302771';
-$pass = '0RKHQ5zu2iOFT';
+$host = 'aws-1-ap-northeast-1.pooler.supabase.com';
+$db   = 'postgres';
+$user = 'postgres.bsterrbsnczxcxwoqcuz';
+$pass = 'ayamgepuk0103';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
