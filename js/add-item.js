@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        fetch('api/add_item.php', {
+        fetch('../api/add_item.php', {
             method: 'POST',
             body: formData
         })

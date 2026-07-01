@@ -1,5 +1,5 @@
 <?php
-require '../api/db.php';
+require 'db.php';
 header('Content-Type: application/json');
 
 $stmt = $pdo->query('SELECT * FROM menu_items ORDER BY created_at DESC');
